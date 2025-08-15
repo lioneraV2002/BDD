@@ -12,3 +12,38 @@ Feature: Calculator Operations
     Given I have a calculator
     When I try to calculate 10.0 with invalid operator "mod" and 0.0
     Then I should get an error message "Invalid operator: mod"
+
+    Scenario: Addition of two numbers
+      Given I have a calculator
+      When I calculate 5.0 plus 3.0
+      Then the result should be 8.0
+
+    Scenario: Subtraction of two numbers
+      Given I have a calculator
+      When I calculate 10.0 minus 4.0
+      Then the result should be 6.0
+
+    Scenario: Multiplication of two numbers
+      Given I have a calculator
+      When I calculate 6.0 multiplied by 7.0
+      Then the result should be 42.0
+
+    Scenario: Division of two numbers
+      Given I have a calculator
+      When I calculate 15.0 divided by 3.0
+      Then the result should be 5.0
+
+    Scenario: Division by zero
+      Given I have a calculator
+      When I try to divide 10.0 by 0.0
+      Then I should get an error message "Division by zero is not allowed"
+
+    Scenario Outline: Multiple calculations with different operators
+      Given I have a calculator
+      When I calculate <operand1> <operation> <operand2>
+      Then the result should be <expected_result>
+
+    Scenario Outline: Invalid operations
+      Given I have a calculator
+      When I try to calculate <operand1> with invalid operator "<operator>" and <operand2>
+      Then I should get an error message "Invalid operator: <operator>"
