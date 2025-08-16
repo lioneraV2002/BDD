@@ -38,12 +38,31 @@ Feature: Calculator Operations
       When I try to divide 10.0 by 0.0
       Then I should get an error message "Division by zero is not allowed"
 
-    Scenario Outline: Multiple calculations with different operators
-      Given I have a calculator
-      When I calculate <operand1> <operation> <operand2>
-      Then the result should be <expected_result>
 
-    Scenario Outline: Invalid operations
-      Given I have a calculator
-      When I try to calculate <operand1> with invalid operator "<operator>" and <operand2>
-      Then I should get an error message "Invalid operator: <operator>"
+  Scenario Outline: Multiple calculations with different operators
+    Given I have a calculator
+    When I calculate <operand1> <operation> <operand2>
+    Then the result should be <expected_result>
+
+    Examples:
+      | operand1 | operation | operand2 | expected_result |
+      | 2.0      | plus      | 3.0      | 5.0            |
+      | 10.0     | minus     | 6.0      | 4.0            |
+      | 4.0      | multiplied by | 5.0  | 20.0           |
+      | 20.0     | divided by    | 4.0  | 5.0            |
+      | 100.0    | plus      | 50.0     | 150.0          |
+      | 25.0     | minus     | 15.0     | 10.0           |
+      | 3.0      | multiplied by | 8.0  | 24.0           |
+      | 36.0     | divided by    | 6.0  | 6.0            |
+
+  Scenario Outline: Invalid operations
+    Given I have a calculator
+    When I try to calculate <operand1> with invalid operator "<operator>" and <operand2>
+    Then I should get an error message "Invalid operator: <operator>"
+
+    Examples:
+      | operand1 | operator | operand2 |
+      | 5.0      | %        | 2.0      |
+      | 10.0     | ^        | 3.0      |
+      | 7.0      | &        | 4.0      |
+
